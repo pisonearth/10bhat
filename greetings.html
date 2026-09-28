@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Birthday Greetings</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #d8b58c;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    /* Bulletin board */
+    .board {
+      min-height: 100vh;
+      padding: 60px 30px;
+      background:
+        linear-gradient(rgba(90, 55, 30, 0.08), rgba(90, 55, 30, 0.08)),
+        #c99b6b;
+    }
+
+    .board-title {
+      text-align: center;
+      color: #fff8e7;
+      font-size: 38px;
+      font-weight: 600;
+      margin-bottom: 45px;
+      text-shadow: 2px 2px 3px rgba(0,0,0,.2);
+    }
+
+    /* Sticky note container */
+    .notes {
+      max-width: 900px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 35px;
+
+      align-items: center;
+    }
+
+    /* Sticky notes */
+    .note {
+      min-height: 170px;
+      padding: 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      color: #4a3428;
+      font-size: 18px;
+      font-weight: 500;
+
+      cursor: pointer;
+
+      box-shadow: 4px 6px 10px rgba(0,0,0,.18);
+
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .note:hover {
+      transform: scale(1.08) rotate(0deg);
+      box-shadow: 7px 10px 15px rgba(0,0,0,.25);
+    }
+
+    /* Different sticky note colors */
+    .note:nth-child(1) {
+      background: #f8c8c8;
+      transform: rotate(-3deg);
+    }
+
+    .note:nth-child(2) {
+      background: #f7df8b;
+      transform: rotate(2deg);
+    }
+
+    .note:nth-child(3) {
+      background: #bde5d2;
+      transform: rotate(-2deg);
+    }
+
+    .note:nth-child(4) {
+      background: #c8d9f5;
+      transform: rotate(3deg);
+    }
+
+    .note:nth-child(5) {
+      background: #f5c6a5;
+      transform: rotate(-4deg);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,.55);
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 9999;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .message {
+      position: relative;
+
+      width: min(600px, 90%);
+
+      padding: 50px 40px;
+
+      background: #fffdf5;
+
+      color: #4a3428;
+
+      text-align: center;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,.3);
+
+      animation: openNote .3s ease;
+    }
+
+    .message h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .message p {
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0 0 20px;
+      text-align: left;
+    }
+
+    .message p:last-child {
+      margin-bottom: 0;
+    }
+
+    .close {
+      position: absolute;
+
+      top: 12px;
+      right: 18px;
+
+      border: none;
+      background: none;
+
+      font-size: 28px;
+
+      color: #70452f;
+
+      cursor: pointer;
+    }
+
+    @keyframes openNote {
+      from {
+        transform: scale(.7) rotate(-3deg);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .board-title {
+        font-size: 30px;
+      }
+
+      .notes {
+        gap: 25px;
+      }
+
+      .note {
+        min-height: 140px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="board">
+
+    <h1 class="board-title">
+      💌 A Few Birthday Messages
+    </h1>
+
+    <div class="notes">
+
+      <div class="note" data-message="0">
+        From your house lizard 💗
+      </div>
+
+      <div class="note" data-message="1">
+        From the pregnant husband 🌸
+      </div>
+
+      <div class="note" data-message="2">
+        A birthday wish 🎂
+      </div>
+
+      <div class="note" data-message="3">
+        Something special ♡
+      </div>
+
+      <div class="note" data-message="4">
+        One more thing... ✨
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- Message popup -->
+
+  <div class="modal" id="messageModal">
+
+    <div class="message">
+
+      <button class="close" id="close">
+        ×
+      </button>
+
+      <h2 id="messageTitle"></h2>
+
+      <div id="messageText"></div>
+
+    </div>
+
+  </div>
+
+
+<script>
+
+  const messages = [
+
+    {
+      title: "Happy Birthday, Grandma! 💗",
+      text: "uwuuwuwuwu"
+    },
+
+    {
+      title: "Happy birthday to my Granny Wife!! 🌸",
+      text: [
+        "It's the birthday of the girl who makes everyone's day better, the very talented artist who is also a very talented dancer, the person who gives me energy everytime I'm tired or sick, the only person I always say yes to, the girl with the smile that feels like a sunshine, and the mother of our children. Coconut gang is very happy to have you! I'm also very lucky to be your husband ❤️",
+
+        "This is the first real birthday since we've known each other, but be ready for a lot more because I will be loving you for a loooong long time, Granny. Happy birthday!!"
+      ]
+    },
+
+    {
+      title: "My Birthday Wish for You 🎂",
+      text: "May you always have many reasons to smile, plenty of happy moments to remember, and lots of love surrounding you."
+    },
+
+    {
+      title: "Thank You ♡",
+      text: "Thank you for all the love, care, stories, laughs, and memories. They mean more than words can say."
+    },
+
+    {
+      title: "One Last Thing ✨",
+      text: "I hope this little surprise made you smile. Happy birthday once again, Grandma! Love you always. ♡"
+    }
+
+  ];
+
+
+  const notes = document.querySelectorAll(".note");
+
+  const modal = document.getElementById("messageModal");
+
+  const title = document.getElementById("messageTitle");
+
+  const text = document.getElementById("messageText");
+
+  const close = document.getElementById("close");
+
+
+  // Open message when a note is clicked
+  notes.forEach(note => {
+
+    note.addEventListener("click", () => {
+
+      const index = Number(note.dataset.message);
+
+      title.textContent = messages[index].title;
+
+      // Make sure text is always treated as an array
+      const paragraphs = Array.isArray(messages[index].text)
+        ? messages[index].text
+        : [messages[index].text];
+
+      text.innerHTML = paragraphs
+        .map(paragraph => `<p>${paragraph}</p>`)
+        .join("");
+
+      modal.classList.add("active");
+
+    });
+
+  });
+
+
+  // Close popup using X
+  close.addEventListener("click", () => {
+
+    modal.classList.remove("active");
+
+  });
+
+
+  // Close popup when clicking outside the message
+  modal.addEventListener("click", (event) => {
+
+    if (event.target === modal) {
+
+      modal.classList.remove("active");
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>

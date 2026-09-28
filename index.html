@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="shortcut icon" href="images/gift.png" type="image/x-icon">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Montserrat Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+    }
+  </style>
+
+  <title>Happy Birthday Granny</title>
+</head>
+
+
+<body class="bg-[#FFF8E7] min-h-screen">
+
+
+  <!-- ========================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ========================= -->
+
+  <main class="min-h-screen flex items-center justify-center px-6">
+
+    <div class="w-full max-w-2xl text-center">
+
+
+      <!-- Capybara -->
+      <img
+        id="capybara"
+        src="images/happy.png"
+        alt="Happy capybara"
+        class="w-32 md:w-40 mx-auto mb-6"
+      >
+
+
+      <!-- Question -->
+      <div
+        class="mb-8 text-3xl md:text-4xl font-medium text-[#4A3428]">
+
+        Would you like to see something made especially for you?
+
+      </div>
+
+
+      <!-- Buttons -->
+      <div class="flex justify-center gap-4">
+
+
+        <!-- YES BUTTON -->
+        <button
+          id="yes"
+          type="button"
+          class="px-8 py-3 text-2xl rounded-lg
+                 bg-[#E9A8A8] text-[#4A3428]
+                 shadow-md
+                 hover:scale-110
+                 hover:shadow-lg
+                 active:scale-95
+                 transition-all duration-300">
+
+          Yes ♡
+
+        </button>
+
+
+        <!-- NO BUTTON -->
+        <button
+          id="no"
+          type="button"
+          class="px-8 py-3 text-2xl rounded-lg
+                 bg-[#C9B8A6] text-[#4A3428]
+                 hover:scale-105
+                 active:scale-95
+                 transition-transform duration-300">
+
+          No
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ========================= -->
+  <!-- BOTTOM MESSAGE -->
+  <!-- ========================= -->
+
+  <div class="fixed bottom-12 left-0 w-full text-center">
+
+    <i class="text-xl text-[#F4C6A6]">
+
+      We have something special for you ♡♡♡
+
+    </i>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- POPUP -->
+  <!-- ========================= -->
+
+  <div
+    id="popup"
+    class="hidden fixed inset-0 z-50
+           flex items-center justify-center
+           bg-black/30 px-6">
+
+
+    <!-- Popup Box -->
+    <div
+      class="w-full max-w-md
+             rounded-2xl
+             bg-[#FFF8E7]
+             p-8
+             text-center
+             shadow-xl">
+
+
+      <!-- Heart -->
+      <div class="mb-4 text-5xl">
+        ♡
+      </div>
+
+
+      <!-- Popup Title -->
+      <h2
+        class="mb-3
+               text-2xl
+               font-semibold
+               text-[#4A3428]">
+
+        Hehe, not yet!
+
+      </h2>
+
+
+      <!-- Popup Message -->
+      <p
+        class="mb-6
+               text-lg
+               text-[#4A3428]">
+
+        There's still a little surprise waiting for you ♡
+
+      </p>
+
+
+      <!-- Close Button -->
+      <button
+        id="closePopup"
+        type="button"
+        class="rounded-lg
+               bg-[#E9A8A8]
+               px-6
+               py-3
+               text-lg
+               text-[#4A3428]
+               shadow-md
+               transition-all
+               duration-300
+               hover:scale-105
+               hover:shadow-lg
+               active:scale-95">
+
+        Okay ♡
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- jQuery -->
+  <!-- ========================= -->
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+  <!-- ========================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ========================= -->
+
+  <script>
+
+    // ==========================================
+    // YES BUTTON
+    // ==========================================
+
+    let yesClicks = 0;
+
+    $("#yes").click(function () {
+
+      yesClicks++;
+
+      // First YES click
+      if (yesClicks === 1) {
+
+        $("#popup").removeClass("hidden");
+
+      }
+
+      // Second YES click
+      else if (yesClicks === 2) {
+
+        window.location.href = "flower.html";
+
+      }
+
+    });
+
+
+    // ==========================================
+    // CLOSE POPUP
+    // ==========================================
+
+    $("#closePopup").click(function () {
+
+      $("#popup").addClass("hidden");
+
+    });
+
+
+    // ==========================================
+    // NO BUTTON - SAD CAPYBARA
+    // ==========================================
+
+    $("#no").mouseenter(function () {
+
+      $("#capybara").attr(
+        "src",
+        "images/sad.png"
+      );
+
+    });
+
+
+    // ==========================================
+    // NO BUTTON - HAPPY CAPYBARA
+    // ==========================================
+
+    $("#no").mouseleave(function () {
+
+      $("#capybara").attr(
+        "src",
+        "images/happy.png"
+      );
+
+    });
+
+
+    // ==========================================
+    // NO BUTTON - RUN AWAY
+    // ==========================================
+
+    $("#no").click(function () {
+
+      var maxX =
+        $(window).width()
+        - $("#no").outerWidth();
+
+      var maxY =
+        $(window).height()
+        - $("#no").outerHeight();
+
+
+      var left =
+        Math.random() * maxX;
+
+      var top =
+        Math.random() * maxY;
+
+
+      $("#no").css({
+
+        position: "fixed",
+
+        left: left,
+
+        top: top
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>
