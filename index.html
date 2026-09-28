@@ -99,21 +99,6 @@
 
 
   <!-- ========================= -->
-  <!-- BOTTOM MESSAGE -->
-  <!-- ========================= -->
-  <!--
-  <div class="fixed bottom-12 left-0 w-full text-center">
-
-    <i class="text-xl text-[#F4C6A6]">
-
-      We have something special for you ♡♡♡
-
-    </i>
-
-  </div>
-  -->
-
-  <!-- ========================= -->
   <!-- POPUP -->
   <!-- ========================= -->
 
@@ -204,14 +189,42 @@
   <script>
 
     // ==========================================
-    // YES BUTTON
+    // BUTTON STATE
     // ==========================================
 
     let yesClicks = 0;
 
+    // Tracks whether NO was clicked before YES
+    let noClickedFirst = false;
+
+
+    // ==========================================
+    // YES BUTTON
+    // ==========================================
+
     $("#yes").click(function () {
 
+      // ------------------------------------------
+      // If NO was clicked first
+      // ------------------------------------------
+      // Skip the popup and immediately redirect
+      // ------------------------------------------
+
+      if (noClickedFirst) {
+
+        window.location.href = "flower.html";
+
+        return;
+
+      }
+
+
+      // ------------------------------------------
+      // Normal YES flow
+      // ------------------------------------------
+
       yesClicks++;
+
 
       // First YES click
       if (yesClicks === 1) {
@@ -219,6 +232,7 @@
         $("#popup").removeClass("hidden");
 
       }
+
 
       // Second YES click
       else if (yesClicks === 2) {
@@ -275,6 +289,22 @@
 
     $("#no").click(function () {
 
+      // ------------------------------------------
+      // If YES has never been clicked,
+      // remember that NO was clicked first
+      // ------------------------------------------
+
+      if (yesClicks === 0) {
+
+        noClickedFirst = true;
+
+      }
+
+
+      // ------------------------------------------
+      // Calculate random position
+      // ------------------------------------------
+
       var maxX =
         $(window).width()
         - $("#no").outerWidth();
@@ -290,6 +320,10 @@
       var top =
         Math.random() * maxY;
 
+
+      // ------------------------------------------
+      // Move NO button
+      // ------------------------------------------
 
       $("#no").css({
 
