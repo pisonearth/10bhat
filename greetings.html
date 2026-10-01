@@ -5,16 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Birthday Greetings</title>
+  <title>Birthday Greetings 🎂</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -22,9 +29,8 @@
       font-family: "Montserrat", sans-serif;
     }
 
-
     /* =========================
-       Bulletin Board
+       BULLETIN BOARD
     ========================= */
 
     .board {
@@ -37,124 +43,135 @@
           rgba(90, 55, 30, 0.08)
         ),
         #c99b6b;
-
-      box-sizing: border-box;
     }
 
     .board-title {
       text-align: center;
-
       color: #fff8e7;
-
       font-size: 38px;
       font-weight: 600;
-
       margin-bottom: 45px;
 
-      text-shadow:
-        2px 2px 3px rgba(0, 0, 0, .2);
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
     }
-
-
-    /* =========================
-       Sticky Notes
-    ========================= */
 
     .notes {
       max-width: 900px;
-
       margin: auto;
 
       display: grid;
-
-      grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(180px, 1fr)
+      );
 
       gap: 35px;
-
       align-items: center;
     }
 
+    /* =========================
+       STICKY NOTES
+    ========================= */
+
     .note {
       min-height: 170px;
-
       padding: 25px;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
       text-align: center;
 
       color: #4a3428;
-
       font-size: 18px;
       font-weight: 500;
 
       cursor: pointer;
 
-      box-shadow:
-        4px 6px 10px rgba(0, 0, 0, .18);
+      box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.18);
 
       transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-      box-sizing: border-box;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
     }
 
     .note:hover {
       transform: scale(1.08) rotate(0deg);
-
-      box-shadow:
-        7px 10px 15px rgba(0, 0, 0, .25);
+      box-shadow: 7px 10px 15px rgba(0, 0, 0, 0.25);
     }
 
+.note:nth-child(1) {
+  background: #f8c8c8; /* Soft Pink */
+  transform: rotate(-3deg);
+}
+
+.note:nth-child(2) {
+  background: #f7df8b; /* Soft Yellow */
+  transform: rotate(2deg);
+}
+
+.note:nth-child(3) {
+  background: #bde5d2; /* Mint Green */
+  transform: rotate(-2deg);
+}
+
+.note:nth-child(4) {
+  background: #c8d9f5; /* Baby Blue */
+  transform: rotate(3deg);
+}
+
+.note:nth-child(5) {
+  background: #f5c6a5; /* Peach */
+  transform: rotate(-4deg);
+}
+
+.note:nth-child(6) {
+  background: #d8c4f1; /* Lavender */
+  transform: rotate(2deg);
+}
+
+.note:nth-child(7) {
+  background: #f4b8c5; /* Rose */
+  transform: rotate(-2deg);
+}
+
+.note:nth-child(8) {
+  background: #b9e3e8; /* Aqua */
+  transform: rotate(3deg);
+}
+
+.note:nth-child(9) {
+  background: #e7d3a8; /* Beige */
+  transform: rotate(-3deg);
+}
+
+.note:nth-child(10) {
+  background: #c9e6b8; /* Pastel Green */
+  transform: rotate(2deg);
+}
+
+.note:nth-child(11) {
+  background: #f2c1df; /* Pink Purple */
+  transform: rotate(-3deg);
+}
+
+.note:nth-child(12) {
+  background: #bfc8ef; /* Periwinkle */
+  transform: rotate(4deg);
+}
 
     /* =========================
-       Sticky Note Colors
-    ========================= */
-
-    .note:nth-child(1) {
-      background: #f8c8c8;
-      transform: rotate(-3deg);
-    }
-
-    .note:nth-child(2) {
-      background: #f7df8b;
-      transform: rotate(2deg);
-    }
-
-    .note:nth-child(3) {
-      background: #bde5d2;
-      transform: rotate(-2deg);
-    }
-
-    .note:nth-child(4) {
-      background: #c8d9f5;
-      transform: rotate(3deg);
-    }
-
-    .note:nth-child(5) {
-      background: #f5c6a5;
-      transform: rotate(-4deg);
-    }
-
-
-    /* =========================
-       Modal / Popup
+       MODAL
     ========================= */
 
     .modal {
       display: none;
 
       position: fixed;
-
       inset: 0;
 
-      background:
-        rgba(0, 0, 0, .55);
+      background: rgba(0, 0, 0, 0.55);
 
       align-items: center;
       justify-content: center;
@@ -164,67 +181,40 @@
       z-index: 9999;
 
       overflow-y: auto;
-
-      box-sizing: border-box;
     }
 
     .modal.active {
       display: flex;
     }
 
-
-    /* =========================
-       Message Box
-    ========================= */
-
     .message {
       position: relative;
 
       width: min(650px, 100%);
+      max-height: calc(100vh - 40px);
 
-      max-height:
-        calc(100vh - 40px);
-
-      padding:
-        50px
-        40px
-        40px;
+      padding: 50px 40px 40px;
 
       background: #fffdf5;
-
       color: #4a3428;
 
       text-align: center;
 
-      box-shadow:
-        0 15px 40px rgba(0, 0, 0, .3);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 
-      animation:
-        openNote .3s ease;
+      animation: openNote 0.3s ease;
 
       overflow-y: auto;
-
       overflow-x: hidden;
-
-      box-sizing: border-box;
 
       flex-shrink: 0;
     }
 
-
-    /* =========================
-       Message Title
-    ========================= */
-
     .message h2 {
       font-size: 30px;
-
       line-height: 1.3;
 
-      margin:
-        0
-        0
-        20px;
+      margin: 0 0 20px;
 
       text-align: left;
 
@@ -232,20 +222,11 @@
       word-wrap: break-word;
     }
 
-
-    /* =========================
-       Message Paragraphs
-    ========================= */
-
     .message p {
       font-size: 17px;
-
       line-height: 1.8;
 
-      margin:
-        0
-        0
-        20px;
+      margin: 0 0 20px;
 
       text-align: left;
 
@@ -257,38 +238,8 @@
       margin-bottom: 0;
     }
 
-
     /* =========================
-       Audio Player
-    ========================= */
-
-    .audio-player {
-      display: none;
-
-      margin-top: 30px;
-
-      padding: 15px;
-
-      background: #f5ead7;
-
-      border-radius: 12px;
-
-      box-sizing: border-box;
-    }
-
-    .audio-player.show {
-      display: block;
-    }
-
-    .audio-player audio {
-      width: 100%;
-
-      display: block;
-    }
-
-
-    /* =========================
-       Close Button
+       CLOSE BUTTON
     ========================= */
 
     .close {
@@ -298,11 +249,9 @@
       right: 18px;
 
       border: none;
-
       background: none;
 
       font-size: 28px;
-
       line-height: 1;
 
       color: #70452f;
@@ -318,47 +267,71 @@
       color: #4a3428;
     }
 
+    /* =========================
+       SONG LINK
+    ========================= */
+
+    .song-link {
+      display: none;
+
+      margin-top: 30px;
+      padding: 16px 20px;
+
+      background: #f5ead7;
+
+      border-radius: 12px;
+
+      text-align: center;
+    }
+
+    .song-link.show {
+      display: block;
+    }
+
+    .song-link a {
+      color: #70452f;
+
+      text-decoration: none;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      transition: opacity 0.2s ease;
+    }
+
+    .song-link a:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
 
     /* =========================
-       Popup Animation
+       ANIMATION
     ========================= */
 
     @keyframes openNote {
-
       from {
-        transform:
-          scale(.7)
-          rotate(-3deg);
-
+        transform: scale(0.7) rotate(-3deg);
         opacity: 0;
       }
 
       to {
-        transform:
-          scale(1)
-          rotate(0);
-
+        transform: scale(1) rotate(0);
         opacity: 1;
       }
-
     }
 
-
     /* =========================
-       Mobile
+       MOBILE
     ========================= */
 
     @media (max-width: 600px) {
 
       .board {
-        padding:
-          40px
-          20px;
+        padding: 40px 20px;
       }
 
       .board-title {
         font-size: 30px;
-
         margin-bottom: 35px;
       }
 
@@ -368,7 +341,6 @@
 
       .note {
         min-height: 140px;
-
         font-size: 16px;
       }
 
@@ -378,19 +350,13 @@
 
       .message {
         width: 100%;
+        max-height: calc(100vh - 30px);
 
-        max-height:
-          calc(100vh - 30px);
-
-        padding:
-          50px
-          25px
-          30px;
+        padding: 50px 25px 30px;
       }
 
       .message h2 {
         font-size: 23px;
-
         line-height: 1.35;
 
         margin-bottom: 18px;
@@ -398,7 +364,6 @@
 
       .message p {
         font-size: 15px;
-
         line-height: 1.7;
 
         margin-bottom: 18px;
@@ -411,19 +376,15 @@
         font-size: 26px;
       }
 
+      .song-link {
+        margin-top: 25px;
+      }
     }
-
-
-    /* =========================
-       Very Small Phones
-    ========================= */
 
     @media (max-width: 380px) {
 
       .board {
-        padding:
-          30px
-          15px;
+        padding: 30px 15px;
       }
 
       .board-title {
@@ -431,10 +392,7 @@
       }
 
       .message {
-        padding:
-          48px
-          20px
-          25px;
+        padding: 48px 20px 25px;
       }
 
       .message h2 {
@@ -443,131 +401,98 @@
 
       .message p {
         font-size: 14px;
-
         line-height: 1.65;
       }
-
     }
-
   </style>
 </head>
 
-
 <body>
 
-  <!-- =========================
-       Birthday Board
-  ========================= -->
-
-  <main class="board">
+  <div class="board">
 
     <h1 class="board-title">
-      💌 A Few Birthday Messages
+      Birthday Greetings 🎂
     </h1>
-
 
     <div class="notes">
 
-      <div
-        class="note"
-        data-message="0"
-      >
+      <div class="note" data-message="0">
         The cutest chicken 🐣
       </div>
 
-
-      <div
-        class="note"
-        data-message="1"
-      >
+      <div class="note" data-message="1">
         The house lizard 🦎
       </div>
 
-
-      <div
-        class="note"
-        data-message="2"
-      >
+      <div class="note" data-message="2">
         The pregnant husband 🫃🏻
       </div>
 
-
-      <div
-        class="note"
-        data-message="3"
-      >
+      <div class="note" data-message="3">
         Catherine! 🔫
       </div>
 
-
-      <div
-        class="note"
-        data-message="4"
-      >
-        Kai 🧸
+      <div class="note" data-message="4">
+        Who is Irah?
       </div>
+
+      <div class="note" data-message="5">
+        Kary Lee
+      </div>
+
+      <div class="note" data-message="6">
+        Kate
+      </div>      
+
+      <div class="note" data-message="7">
+        Kai Patotiee
+      </div>
+      
+      <div class="note" data-message="8">
+        Gab
+      </div>
+      
+      <div class="note" data-message="9">
+        Rose
+      </div> 
+      
+      <div class="note" data-message="10">
+        Cham
+      </div>       
+
+      <div class="note" data-message="11">
+        Matcha
+      </div>          
 
     </div>
 
-  </main>
+  </div>
 
 
   <!-- =========================
-       Message Popup
+       MESSAGE MODAL
   ========================= -->
 
-  <div
-    class="modal"
-    id="messageModal"
-  >
+  <div class="modal" id="messageModal">
 
     <div class="message">
 
-      <button
-        class="close"
-        id="close"
-        aria-label="Close message"
-      >
-        ×
+      <button class="close" id="closeModal">
+        &times;
       </button>
 
-
       <h2 id="messageTitle"></h2>
-
 
       <div id="messageText"></div>
 
 
-      <!-- =========================
-           Birthday Song
+      <!-- SONG LINK -->
+      <div class="song-link" id="songLink">
 
-           This player is permanently
-           inside the popup.
-
-           JavaScript only shows it
-           for Message 0.
-      ========================= -->
-
-      <div
-        class="audio-player"
-        id="audioPlayer"
-      >
-
-        <audio
-          id="birthdayAudio"
-          controls
-          preload="auto"
-        >
-
-          <source
-            src="audio/newchapter.mp3"
-            type="audio/mpeg"
-          >
-
-          Your browser does not support
-          the audio element.
-
-        </audio>
+        <a href="song.html">
+          🎵 Listen to the little song I made for you
+        </a>
 
       </div>
 
@@ -579,29 +504,21 @@
   <script>
 
     /* =========================
-       Birthday Messages
+       BIRTHDAY MESSAGES
     ========================= */
 
     const messages = [
 
-      /* =========================
-         Message 0
-         WITH AUDIO
-      ========================= */
-
       {
-        title:
-          "Happy birthday, Grannybear! 🎂🤍",
+        title: "Happy birthday, Grannybear! 🎂🤍",
 
         text: [
 
           "I honestly don't know how to put into words how grateful I am that I got to know you. I'm really happy that I happened to see your TikTok live that day, because I never imagined that simply watching your live would eventually lead me to you, the Coconut Gang, and a little family that supports, cares for, and makes each other laugh through everything. 🥥🤍",
 
-          "I'm so thankful for every conversation, every laugh, and every chaotic memory we've shared. You probably don't realize it, but knowing you has brought so many unexpected and beautiful people into my life.",
-
           "For your birthday, I pray that you'll always be blessed with happiness, good health, peace, success, and the courage to chase all the dreams in your heart. May this new chapter bring you beautiful experiences, answered prayers, and people who will continue to love and support you.",
 
-          "I also made a little song for you as my small way of saying thank you. 🎵 I hope it reminds you just how happy I am that I found your live that day—and even happier that I stayed. 🤍",
+          "I also made a little song for you as my small way of saying thank you. 🎵",
 
           "Happy birthday, Grannybear! 🫶🏻",
 
@@ -613,194 +530,225 @@
 
         ],
 
-        audio:
-          "audio/newchapter.mp3"
+        song: true
       },
 
 
-      /* =========================
-         Message 1
-         NO AUDIO
-      ========================= */
-
       {
-        title:
-          "Happiest birthday to my hilariously witty, wonderfully brilliant, and most gorgeous 10-baht service-charge therapist, Earn! 🎂✨",
+        title: "Happiest birthday to my hilariously witty, wonderfully brilliant, and most gorgeous 10-baht service-charge therapist, Earn! 🎂✨",
 
         text: [
 
-          "I know I’m probably one of the most questionably qualified people to give you a heartfelt birthday message, considering I’ve made sarcasm my entire personality—but here I am, ruining my own reputation HAHAHA! Beneath all my unsolicited nonsense, there are a few things I genuinely want you to know. Poetic enough that even Shakespeare is shaking and Confucius is confused.",
+          "I know I'm probably one of the most questionably qualified people to give you a heartfelt birthday message, considering I've made sarcasm my entire personality—but here I am, ruining my own reputation HAHAHA! Beneath all my unsolicited nonsense, there are a few things I genuinely want you to know. Poetic enough that even Shakespeare is shaking and Confucius is confused.",
 
-          "You’re one of the most wonderful people we’re genuinely grateful to have found this year. You remind us of a wildflower—the kind that blooms wherever life carries it, quietly adding color to places that might otherwise go unnoticed, and leaving a little beauty in the hearts of those who encounter you.",
+          "You're one of the most wonderful people we're genuinely grateful to have found this year. You remind us of a wildflower—the kind that blooms wherever life carries it, quietly adding color to places that might otherwise go unnoticed, and leaving a little beauty in the hearts of those who encounter you.",
 
-          "We found that same warmth in our late-night conversations. We’d arrive carrying the weight of whatever the day had left behind, but somehow, between the tired stories, random thoughts, and ridiculous laughter, we’d forget about it for a little while. Maybe you never realized it, but those moments became little pockets of comfort—small reminders that even after a long, difficult day, there was still room to laugh, breathe, and simply feel okay again.",
+          "We found that same warmth in our late-night conversations. We'd arrive carrying the weight of whatever the day had left behind, but somehow, between the tired stories, random thoughts, and ridiculous laughter, we'd forget about it for a little while. Maybe you never realized it, but those moments became little pockets of comfort—small reminders that even after a long, difficult day, there was still room to laugh, breathe, and simply feel okay again.",
 
-          "And perhaps that’s what makes finding you along the way so special. You became one of those beautiful surprises life quietly leaves in our path—something we never went looking for, but will always be grateful we found.",
+          "And perhaps that's what makes finding you along the way so special. You became one of those beautiful surprises life quietly leaves in our path—something we never went looking for, but will always be grateful we found.",
 
-          "May you receive all the beautiful things your heart hopes for—see your dreams come to life, especially your dream of having a gallery filled with your own art, experience every adventure on your bucket list, and be surrounded by people who value and cherish you just as much as you do them. May life give back all the kindness you’ve shared, keep you safe along the way, and make this next chapter of your life, still waiting to unfold, even more beautiful than the last. And may you find success in everything you do, while your hard work be rewarded with abundance—including, of course, a very healthy bank account because dreams are beautiful, but bills are unfortunately real.",
+          "May you receive all the beautiful things your heart hopes for—see your dreams come to life, especially your dream of having a gallery filled with your own art, experience every adventure on your bucket list, and be surrounded by people who value and cherish you just as much as you do them. May life give back all the kindness you've shared, keep you safe along the way, and make this next chapter of your life, still waiting to unfold, even more beautiful than the last. And may you find success in everything you do, while your hard work be rewarded with abundance—including, of course, a very healthy bank account because dreams are beautiful, but bills are unfortunately real.",
 
-          "And please don’t ever be afraid that we’ll forget you when life gets busy. How could we forget someone who’s always included in our prayers? Keep slaying, Earn. We’re always proud of you, and we’ll always be cheering you on. 😌🫶🏻",
+          "And please don't ever be afraid that we'll forget you when life gets busy. How could we forget someone who's always included in our prayers? Keep slaying, Earn. We're always proud of you, and we'll always be cheering you on. 😌🫶🏻",
 
           "Annoyingly pretty,",
 
           "Mika 🦎"
 
-        ]
+        ],
+
+        song: false
       },
 
 
-      /* =========================
-         Message 2
-      ========================= */
-
       {
-        title:
-          "My Birthday Wish for You 🎂",
+        title: "Happy birthday to my Granny Wife!!",
 
-        text:
-          "May you always have many reasons to smile, plenty of happy moments to remember, and lots of love surrounding you."
+        text: [
+          "It's the birthday of the girl who makes everyone's day better, the very talented artist who is also a very talented dancer, the person who gives me energy everytime I'm tired or sick, the only person I always say yes to, the girl with the smile that feels like a sunshine, and the mother of our children. Coconut gang is very happy to have you! I'm also very lucky to be your husband ❤️",
+          "This is the first real birthday since we've known each other, but be ready for a lot more because I will be loving you for a loooong long time, Granny.  Happy birthday!!",
+        ],
+
+
+        song: false
       },
 
 
-      /* =========================
-         Message 3
-      ========================= */
-
       {
-        title:
-          "Thank You ♡",
+        title: "",
 
-        text:
-          "Thank you for all the love, care, stories, laughs, and memories. They mean more than words can say."
+        text: [
+          "HBD NONG SAO KUN SUAY MBTC AND WISH U ALL THE BEST",
+          "Pau2 ❤️"
+        ],
+
+        song: false
       },
 
 
-      /* =========================
-         Message 4
-      ========================= */
+      {
+        title: "Happy birthday to our one and only Grandma Earn! 🥹💗",
+
+        text: [
+          "I hope you know how loved and appreciated you are, not just today but every single day. Thank you for all the laughs, memories, random moments, and for simply being someone who makes things a little brighter. 🫶🏻",
+          "Another year older, but don’t worry, age is just a number… a number that we will respectfully NOT mention.😌 HAHAHA",
+          "May this new chapter bring you more happiness, peace, good health, and blessings. And please remember, you’re not getting old. You’re just becoming a limited edition vintage. HAHAHA just kidding 🤭",
+          "Enjoy your day, Grandma! We love you so much, Grandma. May your birthday be as amazing, chaotic, and unforgettable as you are. Enjoy your special day! Our dearest senior citizen! 😘🎂💐",
+          "FROM:IRAH 🤟🫂",
+
+        ],
+
+        song: false
+      },
 
       {
-        title:
-          "One Last Thing ✨",
+        title: "Happy Birthday, Earn 🤍",
 
-        text:
-          "I hope this little surprise made you smile. Happy birthday once again! Love you always. ♡"
-      }
+        text: [
+          "Even from far away, you’ve created something really special, a community full of kindness, laughter, and connection. Thank you for sharing your art, your time, and your heart with all of us.",
+          "สุขสันต์วันเกิด, wishing you happiness on your birthday and I truly hope this year brings you peace, inspiration, and so much joy. Keep shining and painting your beautiful world. 🎨✨",
+          "Sending you love all the way from Mexico 🇲🇽",
+        ],
 
+        song: false
+      },
+
+      {
+        title: "helloo p'earn ka our dearest grandma in earth! ",
+
+        text: [
+          "happiest birthday to youu na, I wish you have a safe and happy year na ka. Stay healthy and drink a lot of water na ka. I still remember the first day I met you and watched your live for the first time, it was the happiest day for me because I found not only a friend but a phi sao also. To be honest, watching your live helps me distract myself from everything I'm going through because at that time I wasn't really mentally well, but as day goes by watching you and having moments with you together with the coconut gang really helps me a lot. I hope this bonds between us never ends and let's all continue to grow together, thank you for being part of my life and I am really happy na for being part of the coconut gang! again happy birthday grandma earn and I wish you all the best na ka, I hope you are happy and contented in everything you have right now, goodluck on your journey na and wishing you all the best. rak na ka p'earn!✨🩷",
+          "FROM: KATEE",
+        ],
+
+        song: false
+      },
+
+      {
+        title: "Happy birthday, Granny!",
+
+        text: [
+          "I hope u know how special and appreciated u r. I wish u nothing but happiness, good health, and success in everything u do. May this new chapter brings u clarity, growth, genuine happiness, and moments that make u smile. Always remember to stay true to urself and never forget how far you've come. I wish u all the great things in this world ^⁠^",
+          "-kai patotieee",
+        ],
+
+        song: false
+      },    
+      
+      {
+        title: "Hi Master!",
+
+        text: [
+          "How are you now? Are you feeling well? I hope you're doing fine. First of all, I want to wish you the happiest birthday, Master! I wish you all the best and all the happiness in life. I hope you always pursue what you love and stay safe as always. I also hope we can see you livestream again during your free time because I (we) miss you so much already. Don't forget about us, okay? I hope you will chat and livestream with us soon about your day. Enjoy your birthday, Master, and stay happy, kind, and lovable always. Happy birthday again! Chǎn rák khun 🫶🫶.",
+          "From: Gab",
+        ],
+
+        song: false
+      },      
+      
+      {
+        title: "Hi Mommy, happy, happy birthday! 🎉❤️ ",
+
+        text: [
+          "I’m truly grateful that I got the chance to know you, even if it’s only through TikTok. On your special day, I pray that God continues to bless you and your whole family with good health, happiness, and many more beautiful years to come. Enjoy your special day, Mommy! God bless you always! 💕 ",
+          "From: Rose",
+        ],
+
+        song: false
+      },       
+      
+      {
+        title: "Happy Birthday, Earn! 🎂💗",
+
+        text: [
+          "I hope you’re always happy and healthy, with lots of money coming your way and not too much work! I hope you’re always surrounded by good people and by people who truly love and care about you.I don’t really know what else to wish for, but I hope everything you wish for comes true. No matter what happens or what you have to go through, I’ll always be by your side. And of course, I’ll keep annoying you as much as I can  Love you so much, Earn! 💗",
+          "From, ChamCham 🥥",
+        ],
+
+        song: false
+      },     
+      
+      {
+        title: "Happy birthday phi🎉",
+
+        text: [
+          "its your special day👏 I wish you good health, happiness, and success and always be safe because the flood of bangkok🥹 hehe The Cucunot Gang is right here to always support you. We will always love you mwaps 😚 God bless you and enjoy your day..hope to see you soon🤍",
+          "Matcha🍵😁",
+        ],
+
+        song: false
+      },        
     ];
 
 
     /* =========================
-       Get Elements
+       ELEMENTS
     ========================= */
 
-    const notes =
-      document.querySelectorAll(".note");
+    const notes = document.querySelectorAll(".note");
 
-    const modal =
-      document.getElementById("messageModal");
+    const modal = document.getElementById("messageModal");
 
-    const title =
-      document.getElementById("messageTitle");
+    const closeButton = document.getElementById("closeModal");
 
-    const text =
-      document.getElementById("messageText");
+    const title = document.getElementById("messageTitle");
 
-    const audioPlayer =
-      document.getElementById("audioPlayer");
+    const text = document.getElementById("messageText");
 
-    const birthdayAudio =
-      document.getElementById("birthdayAudio");
-
-    const close =
-      document.getElementById("close");
+    const songLink = document.getElementById("songLink");
 
 
     /* =========================
-       Preload Audio
-    ========================= */
-
-    birthdayAudio.load();
-
-
-    /* =========================
-       Open Message
+       OPEN NOTES
     ========================= */
 
     notes.forEach(note => {
 
       note.addEventListener("click", () => {
 
-        const index =
-          Number(note.dataset.message);
+        const index = Number(note.dataset.message);
+
+        const message = messages[index];
 
 
-        /* =========================
-           Set Title
-        ========================= */
+        /* TITLE */
 
-        title.textContent =
-          messages[index].title;
+        title.textContent = message.title;
 
 
-        /* =========================
-           Set Message
-        ========================= */
+        /* MESSAGE */
 
-        const paragraphs =
-          Array.isArray(messages[index].text)
-            ? messages[index].text
-            : [messages[index].text];
+        const paragraphs = Array.isArray(message.text)
+          ? message.text
+          : [message.text];
 
 
-        text.innerHTML =
-          paragraphs
-            .map(
-              paragraph =>
-                `<p>${paragraph}</p>`
-            )
-            .join("");
+        text.innerHTML = paragraphs
+          .map(paragraph => `<p>${paragraph}</p>`)
+          .join("");
 
 
-        /* =========================
-           Show / Hide Audio
-        ========================= */
+        /* SONG LINK */
 
-        if (messages[index].audio) {
+        if (message.song) {
 
-          audioPlayer.classList.add("show");
+          songLink.classList.add("show");
 
         } else {
 
-          audioPlayer.classList.remove("show");
-
-          /*
-            Stop the song if another
-            message is opened.
-          */
-
-          birthdayAudio.pause();
-
-          birthdayAudio.currentTime = 0;
+          songLink.classList.remove("show");
 
         }
 
 
-        /* =========================
-           Open Modal
-        ========================= */
+        /* OPEN MODAL */
 
         modal.classList.add("active");
 
 
-        /* =========================
-           Scroll Popup To Top
-        ========================= */
+        /* RESET SCROLL */
 
-        const messageBox =
-          document.querySelector(".message");
-
-        messageBox.scrollTop = 0;
+        document.querySelector(".message").scrollTop = 0;
 
       });
 
@@ -808,79 +756,46 @@
 
 
     /* =========================
-       Close Button
-    ========================= */
-
-    close.addEventListener("click", () => {
-
-      modal.classList.remove("active");
-
-    });
-
-
-    /* =========================
-       Stop Audio When Closing
+       CLOSE MODAL
     ========================= */
 
     function closeModal() {
 
       modal.classList.remove("active");
 
-      birthdayAudio.pause();
-
-      birthdayAudio.currentTime = 0;
-
     }
 
 
-    /* =========================
-       Close Button
-    ========================= */
+    closeButton.addEventListener("click", closeModal);
 
-    close.addEventListener("click", () => {
 
-      closeModal();
+    /* CLICK OUTSIDE */
+
+    modal.addEventListener("click", (event) => {
+
+      if (event.target === modal) {
+
+        closeModal();
+
+      }
 
     });
 
 
-    /* =========================
-       Click Outside
-    ========================= */
+    /* ESC KEY */
 
-    modal.addEventListener(
-      "click",
-      (event) => {
+    document.addEventListener("keydown", (event) => {
 
-        if (event.target === modal) {
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("active")
+      ) {
 
-          closeModal();
-
-        }
+        closeModal();
 
       }
-    );
 
-
-    /* =========================
-       ESC Key
-    ========================= */
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "Escape" &&
-          modal.classList.contains("active")
-        ) {
-
-          closeModal();
-
-        }
-
-      }
-    );
+    });
 
   </script>
 
