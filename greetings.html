@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,12 @@
   <title>Birthday Greetings</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  >
+
   <style>
     body {
       margin: 0;
@@ -17,64 +22,100 @@
       font-family: "Montserrat", sans-serif;
     }
 
-    /* Bulletin board */
+
+    /* =========================
+       Bulletin Board
+    ========================= */
+
     .board {
       min-height: 100vh;
       padding: 60px 30px;
+
       background:
-        linear-gradient(rgba(90, 55, 30, 0.08), rgba(90, 55, 30, 0.08)),
+        linear-gradient(
+          rgba(90, 55, 30, 0.08),
+          rgba(90, 55, 30, 0.08)
+        ),
         #c99b6b;
+
+      box-sizing: border-box;
     }
 
     .board-title {
       text-align: center;
+
       color: #fff8e7;
+
       font-size: 38px;
       font-weight: 600;
+
       margin-bottom: 45px;
-      text-shadow: 2px 2px 3px rgba(0,0,0,.2);
+
+      text-shadow:
+        2px 2px 3px rgba(0, 0, 0, .2);
     }
 
-    /* Sticky note container */
+
+    /* =========================
+       Sticky Notes
+    ========================= */
+
     .notes {
       max-width: 900px;
+
       margin: auto;
 
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
       gap: 35px;
 
       align-items: center;
     }
 
-    /* Sticky notes */
     .note {
       min-height: 170px;
+
       padding: 25px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       text-align: center;
 
       color: #4a3428;
+
       font-size: 18px;
       font-weight: 500;
 
       cursor: pointer;
 
-      box-shadow: 4px 6px 10px rgba(0,0,0,.18);
+      box-shadow:
+        4px 6px 10px rgba(0, 0, 0, .18);
 
-      transition: transform .25s ease, box-shadow .25s ease;
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+      box-sizing: border-box;
     }
 
     .note:hover {
       transform: scale(1.08) rotate(0deg);
-      box-shadow: 7px 10px 15px rgba(0,0,0,.25);
+
+      box-shadow:
+        7px 10px 15px rgba(0, 0, 0, .25);
     }
 
-    /* Different sticky note colors */
+
+    /* =========================
+       Sticky Note Colors
+    ========================= */
+
     .note:nth-child(1) {
       background: #f8c8c8;
       transform: rotate(-3deg);
@@ -100,14 +141,20 @@
       transform: rotate(-4deg);
     }
 
-    /* Modal */
+
+    /* =========================
+       Modal / Popup
+    ========================= */
+
     .modal {
       display: none;
 
       position: fixed;
+
       inset: 0;
 
-      background: rgba(0,0,0,.55);
+      background:
+        rgba(0, 0, 0, .55);
 
       align-items: center;
       justify-content: center;
@@ -115,18 +162,33 @@
       padding: 20px;
 
       z-index: 9999;
+
+      overflow-y: auto;
+
+      box-sizing: border-box;
     }
 
     .modal.active {
       display: flex;
     }
 
+
+    /* =========================
+       Message Box
+    ========================= */
+
     .message {
       position: relative;
 
-      width: min(600px, 90%);
+      width: min(650px, 100%);
 
-      padding: 50px 40px;
+      max-height:
+        calc(100vh - 40px);
+
+      padding:
+        50px
+        40px
+        40px;
 
       background: #fffdf5;
 
@@ -134,59 +196,170 @@
 
       text-align: center;
 
-      box-shadow: 0 15px 40px rgba(0,0,0,.3);
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, .3);
 
-      animation: openNote .3s ease;
+      animation:
+        openNote .3s ease;
+
+      overflow-y: auto;
+
+      overflow-x: hidden;
+
+      box-sizing: border-box;
+
+      flex-shrink: 0;
     }
+
+
+    /* =========================
+       Message Title
+    ========================= */
 
     .message h2 {
       font-size: 30px;
-      margin-bottom: 20px;
+
+      line-height: 1.3;
+
+      margin:
+        0
+        0
+        20px;
+
       text-align: left;
+
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
+
+
+    /* =========================
+       Message Paragraphs
+    ========================= */
 
     .message p {
       font-size: 17px;
+
       line-height: 1.8;
-      margin: 0 0 20px;
+
+      margin:
+        0
+        0
+        20px;
+
       text-align: left;
+
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .message p:last-child {
       margin-bottom: 0;
     }
 
+
+    /* =========================
+       Audio Player
+    ========================= */
+
+    .audio-player {
+      display: none;
+
+      margin-top: 30px;
+
+      padding: 15px;
+
+      background: #f5ead7;
+
+      border-radius: 12px;
+
+      box-sizing: border-box;
+    }
+
+    .audio-player.show {
+      display: block;
+    }
+
+    .audio-player audio {
+      width: 100%;
+
+      display: block;
+    }
+
+
+    /* =========================
+       Close Button
+    ========================= */
+
     .close {
       position: absolute;
 
-      top: 12px;
+      top: 10px;
       right: 18px;
 
       border: none;
+
       background: none;
 
       font-size: 28px;
 
+      line-height: 1;
+
       color: #70452f;
 
       cursor: pointer;
+
+      z-index: 10;
+
+      padding: 5px;
     }
 
+    .close:hover {
+      color: #4a3428;
+    }
+
+
+    /* =========================
+       Popup Animation
+    ========================= */
+
     @keyframes openNote {
+
       from {
-        transform: scale(.7) rotate(-3deg);
+        transform:
+          scale(.7)
+          rotate(-3deg);
+
         opacity: 0;
       }
 
       to {
-        transform: scale(1) rotate(0);
+        transform:
+          scale(1)
+          rotate(0);
+
         opacity: 1;
       }
+
     }
 
+
+    /* =========================
+       Mobile
+    ========================= */
+
     @media (max-width: 600px) {
+
+      .board {
+        padding:
+          40px
+          20px;
+      }
+
       .board-title {
         font-size: 30px;
+
+        margin-bottom: 35px;
       }
 
       .notes {
@@ -195,12 +368,96 @@
 
       .note {
         min-height: 140px;
+
+        font-size: 16px;
       }
+
+      .modal {
+        padding: 15px;
+      }
+
+      .message {
+        width: 100%;
+
+        max-height:
+          calc(100vh - 30px);
+
+        padding:
+          50px
+          25px
+          30px;
+      }
+
+      .message h2 {
+        font-size: 23px;
+
+        line-height: 1.35;
+
+        margin-bottom: 18px;
+      }
+
+      .message p {
+        font-size: 15px;
+
+        line-height: 1.7;
+
+        margin-bottom: 18px;
+      }
+
+      .close {
+        top: 8px;
+        right: 12px;
+
+        font-size: 26px;
+      }
+
     }
+
+
+    /* =========================
+       Very Small Phones
+    ========================= */
+
+    @media (max-width: 380px) {
+
+      .board {
+        padding:
+          30px
+          15px;
+      }
+
+      .board-title {
+        font-size: 26px;
+      }
+
+      .message {
+        padding:
+          48px
+          20px
+          25px;
+      }
+
+      .message h2 {
+        font-size: 21px;
+      }
+
+      .message p {
+        font-size: 14px;
+
+        line-height: 1.65;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
+
+  <!-- =========================
+       Birthday Board
+  ========================= -->
 
   <main class="board">
 
@@ -208,26 +465,46 @@
       💌 A Few Birthday Messages
     </h1>
 
+
     <div class="notes">
 
-      <div class="note" data-message="0">
-        From your house lizard 💗
+      <div
+        class="note"
+        data-message="0"
+      >
+        The cutest chicken 🐣
       </div>
 
-      <div class="note" data-message="1">
-        From the pregnant husband 🌸
+
+      <div
+        class="note"
+        data-message="1"
+      >
+        The house lizard 🦎
       </div>
 
-      <div class="note" data-message="2">
-        A birthday wish 🎂
+
+      <div
+        class="note"
+        data-message="2"
+      >
+        The pregnant husband 🫃🏻
       </div>
 
-      <div class="note" data-message="3">
-        Something special ♡
+
+      <div
+        class="note"
+        data-message="3"
+      >
+        Catherine! 🔫
       </div>
 
-      <div class="note" data-message="4">
-        One more thing... ✨
+
+      <div
+        class="note"
+        data-message="4"
+      >
+        Kai 🧸
       </div>
 
     </div>
@@ -235,115 +512,378 @@
   </main>
 
 
-  <!-- Message popup -->
+  <!-- =========================
+       Message Popup
+  ========================= -->
 
-  <div class="modal" id="messageModal">
+  <div
+    class="modal"
+    id="messageModal"
+  >
 
     <div class="message">
 
-      <button class="close" id="close">
+      <button
+        class="close"
+        id="close"
+        aria-label="Close message"
+      >
         ×
       </button>
 
+
       <h2 id="messageTitle"></h2>
 
+
       <div id="messageText"></div>
+
+
+      <!-- =========================
+           Birthday Song
+
+           This player is permanently
+           inside the popup.
+
+           JavaScript only shows it
+           for Message 0.
+      ========================= -->
+
+      <div
+        class="audio-player"
+        id="audioPlayer"
+      >
+
+        <audio
+          id="birthdayAudio"
+          controls
+          preload="auto"
+        >
+
+          <source
+            src="audio/newchapter.mp3"
+            type="audio/mpeg"
+          >
+
+          Your browser does not support
+          the audio element.
+
+        </audio>
+
+      </div>
 
     </div>
 
   </div>
 
 
-<script>
+  <script>
 
-  const messages = [
+    /* =========================
+       Birthday Messages
+    ========================= */
 
-    {
-      title: "Happy Birthday, Grandma! 💗",
-      text: "uwuuwuwuwu"
-    },
+    const messages = [
 
-    {
-      title: "Happy birthday to my Granny Wife!! 🌸",
-      text: [
-        "uwu"
-      ]
-    },
+      /* =========================
+         Message 0
+         WITH AUDIO
+      ========================= */
 
-    {
-      title: "My Birthday Wish for You 🎂",
-      text: "May you always have many reasons to smile, plenty of happy moments to remember, and lots of love surrounding you."
-    },
+      {
+        title:
+          "Happy birthday, Grannybear! 🎂🤍",
 
-    {
-      title: "Thank You ♡",
-      text: "Thank you for all the love, care, stories, laughs, and memories. They mean more than words can say."
-    },
+        text: [
 
-    {
-      title: "One Last Thing ✨",
-      text: "I hope this little surprise made you smile. Happy birthday once again, Grandma! Love you always. ♡"
-    }
+          "I honestly don't know how to put into words how grateful I am that I got to know you. I'm really happy that I happened to see your TikTok live that day, because I never imagined that simply watching your live would eventually lead me to you, the Coconut Gang, and a little family that supports, cares for, and makes each other laugh through everything. 🥥🤍",
 
-  ];
+          "I'm so thankful for every conversation, every laugh, and every chaotic memory we've shared. You probably don't realize it, but knowing you has brought so many unexpected and beautiful people into my life.",
 
+          "For your birthday, I pray that you'll always be blessed with happiness, good health, peace, success, and the courage to chase all the dreams in your heart. May this new chapter bring you beautiful experiences, answered prayers, and people who will continue to love and support you.",
 
-  const notes = document.querySelectorAll(".note");
+          "I also made a little song for you as my small way of saying thank you. 🎵 I hope it reminds you just how happy I am that I found your live that day—and even happier that I stayed. 🤍",
 
-  const modal = document.getElementById("messageModal");
+          "Happy birthday, Grannybear! 🫶🏻",
 
-  const title = document.getElementById("messageTitle");
+          "I'm really, really glad I met you.",
 
-  const text = document.getElementById("messageText");
+          "With love,",
 
-  const close = document.getElementById("close");
+          "Omelette 🍳"
+
+        ],
+
+        audio:
+          "audio/newchapter.mp3"
+      },
 
 
-  // Open message when a note is clicked
-  notes.forEach(note => {
+      /* =========================
+         Message 1
+         NO AUDIO
+      ========================= */
 
-    note.addEventListener("click", () => {
+      {
+        title:
+          "Happiest birthday to my hilariously witty, wonderfully brilliant, and most gorgeous 10-baht service-charge therapist, Earn! 🎂✨",
 
-      const index = Number(note.dataset.message);
+        text: [
 
-      title.textContent = messages[index].title;
+          "I know I’m probably one of the most questionably qualified people to give you a heartfelt birthday message, considering I’ve made sarcasm my entire personality—but here I am, ruining my own reputation HAHAHA! Beneath all my unsolicited nonsense, there are a few things I genuinely want you to know. Poetic enough that even Shakespeare is shaking and Confucius is confused.",
 
-      // Make sure text is always treated as an array
-      const paragraphs = Array.isArray(messages[index].text)
-        ? messages[index].text
-        : [messages[index].text];
+          "You’re one of the most wonderful people we’re genuinely grateful to have found this year. You remind us of a wildflower—the kind that blooms wherever life carries it, quietly adding color to places that might otherwise go unnoticed, and leaving a little beauty in the hearts of those who encounter you.",
 
-      text.innerHTML = paragraphs
-        .map(paragraph => `<p>${paragraph}</p>`)
-        .join("");
+          "We found that same warmth in our late-night conversations. We’d arrive carrying the weight of whatever the day had left behind, but somehow, between the tired stories, random thoughts, and ridiculous laughter, we’d forget about it for a little while. Maybe you never realized it, but those moments became little pockets of comfort—small reminders that even after a long, difficult day, there was still room to laugh, breathe, and simply feel okay again.",
 
-      modal.classList.add("active");
+          "And perhaps that’s what makes finding you along the way so special. You became one of those beautiful surprises life quietly leaves in our path—something we never went looking for, but will always be grateful we found.",
+
+          "May you receive all the beautiful things your heart hopes for—see your dreams come to life, especially your dream of having a gallery filled with your own art, experience every adventure on your bucket list, and be surrounded by people who value and cherish you just as much as you do them. May life give back all the kindness you’ve shared, keep you safe along the way, and make this next chapter of your life, still waiting to unfold, even more beautiful than the last. And may you find success in everything you do, while your hard work be rewarded with abundance—including, of course, a very healthy bank account because dreams are beautiful, but bills are unfortunately real.",
+
+          "And please don’t ever be afraid that we’ll forget you when life gets busy. How could we forget someone who’s always included in our prayers? Keep slaying, Earn. We’re always proud of you, and we’ll always be cheering you on. 😌🫶🏻",
+
+          "Annoyingly pretty,",
+
+          "Mika 🦎"
+
+        ]
+      },
+
+
+      /* =========================
+         Message 2
+      ========================= */
+
+      {
+        title:
+          "My Birthday Wish for You 🎂",
+
+        text:
+          "May you always have many reasons to smile, plenty of happy moments to remember, and lots of love surrounding you."
+      },
+
+
+      /* =========================
+         Message 3
+      ========================= */
+
+      {
+        title:
+          "Thank You ♡",
+
+        text:
+          "Thank you for all the love, care, stories, laughs, and memories. They mean more than words can say."
+      },
+
+
+      /* =========================
+         Message 4
+      ========================= */
+
+      {
+        title:
+          "One Last Thing ✨",
+
+        text:
+          "I hope this little surprise made you smile. Happy birthday once again! Love you always. ♡"
+      }
+
+    ];
+
+
+    /* =========================
+       Get Elements
+    ========================= */
+
+    const notes =
+      document.querySelectorAll(".note");
+
+    const modal =
+      document.getElementById("messageModal");
+
+    const title =
+      document.getElementById("messageTitle");
+
+    const text =
+      document.getElementById("messageText");
+
+    const audioPlayer =
+      document.getElementById("audioPlayer");
+
+    const birthdayAudio =
+      document.getElementById("birthdayAudio");
+
+    const close =
+      document.getElementById("close");
+
+
+    /* =========================
+       Preload Audio
+    ========================= */
+
+    birthdayAudio.load();
+
+
+    /* =========================
+       Open Message
+    ========================= */
+
+    notes.forEach(note => {
+
+      note.addEventListener("click", () => {
+
+        const index =
+          Number(note.dataset.message);
+
+
+        /* =========================
+           Set Title
+        ========================= */
+
+        title.textContent =
+          messages[index].title;
+
+
+        /* =========================
+           Set Message
+        ========================= */
+
+        const paragraphs =
+          Array.isArray(messages[index].text)
+            ? messages[index].text
+            : [messages[index].text];
+
+
+        text.innerHTML =
+          paragraphs
+            .map(
+              paragraph =>
+                `<p>${paragraph}</p>`
+            )
+            .join("");
+
+
+        /* =========================
+           Show / Hide Audio
+        ========================= */
+
+        if (messages[index].audio) {
+
+          audioPlayer.classList.add("show");
+
+        } else {
+
+          audioPlayer.classList.remove("show");
+
+          /*
+            Stop the song if another
+            message is opened.
+          */
+
+          birthdayAudio.pause();
+
+          birthdayAudio.currentTime = 0;
+
+        }
+
+
+        /* =========================
+           Open Modal
+        ========================= */
+
+        modal.classList.add("active");
+
+
+        /* =========================
+           Scroll Popup To Top
+        ========================= */
+
+        const messageBox =
+          document.querySelector(".message");
+
+        messageBox.scrollTop = 0;
+
+      });
 
     });
 
-  });
 
+    /* =========================
+       Close Button
+    ========================= */
 
-  // Close popup using X
-  close.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-  });
-
-
-  // Close popup when clicking outside the message
-  modal.addEventListener("click", (event) => {
-
-    if (event.target === modal) {
+    close.addEventListener("click", () => {
 
       modal.classList.remove("active");
 
+    });
+
+
+    /* =========================
+       Stop Audio When Closing
+    ========================= */
+
+    function closeModal() {
+
+      modal.classList.remove("active");
+
+      birthdayAudio.pause();
+
+      birthdayAudio.currentTime = 0;
+
     }
 
-  });
 
-</script>
+    /* =========================
+       Close Button
+    ========================= */
+
+    close.addEventListener("click", () => {
+
+      closeModal();
+
+    });
+
+
+    /* =========================
+       Click Outside
+    ========================= */
+
+    modal.addEventListener(
+      "click",
+      (event) => {
+
+        if (event.target === modal) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       ESC Key
+    ========================= */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("active")
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
+
 </html>
